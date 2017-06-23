@@ -67,7 +67,7 @@ function _bot() {
       else if(msg.indexOf('$$')!= -1){
       getExchangeRate(event);
       }
-      else if(msf.indexOf('天氣')!=-1){
+      else if(msg.indexOf('天氣')!=-1){
       //weather(event);
       }
       else{
