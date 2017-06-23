@@ -14,6 +14,7 @@ var bot = linebot({
 var timer;//for PM2.5
 var timer2;//for exchange rate
 var exCounter;//for exchange rate counter
+var userId = 'U7921a56a665525ddf9198ea3807a460f';
 var pm = [];
 _getJSON();
 
@@ -53,7 +54,6 @@ function _bot() {
       pmvalue(event,msg);
       }
       else if(msg.indexOf('匯率')!= -1){
-      var userId = 'U7921a56a665525ddf9198ea3807a460f';//my userId
       var sendMsg = '支援匯率： ';
       var sendMsg2 = '美金、港幣、英鎊、澳幣、加拿大幣、新加坡幣、瑞士法郎、日圓、南非幣';
       var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣';
@@ -128,8 +128,9 @@ function getExchangeRate(event) {
     } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
-      console.log(target[exCounter*2-1].children[0].data);
-      answer = target[exCounter*2-1].children[0].data;
+      var targetIndex = exCounter*2-1;
+      console.log(target[targetIndex].children[0].data);
+      answer = target[targetIndex].children[0].data;
       replyMsg = msg+'匯率= ' + answer;
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
