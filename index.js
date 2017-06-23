@@ -146,14 +146,18 @@ function getExchangeRate(event) {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
       console.log('get target Index:'+ exCounter);
+      var exCounter2 = exCounter*2;
       
-      console.log(target[exCounter].children[2].data);
-      var answer = target[exCounter].children[2].data;
+      var answer = target[exCounter2].children[0].data;
+
+      console.log(target[exCounter2].children[0].data);
       replyMsg = moneyArr[exCounter]+'買入匯率= ' + answer;
 
-      console.log(target[exCounter].children[12].data);
-      var answer2 = target[exCounter].children[12].data;
+      
+      var answer2 = target[exCounter2+1].children[0].data;
+      console.log(target[exCounter2+1].children[0].data);
       replyMsg2 = moneyArr[exCounter]+'賣出匯率= ' + answer2;
+
       bot.push(userId,replyMsg); 
       bot.push(userId,replyMsg2); 
     }
