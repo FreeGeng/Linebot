@@ -113,7 +113,7 @@ function getExchangeRate(event) {
         console.log('error');
       });
 
-      timer2 = setInterval(_japan, 120000);
+      timer2 = setInterval(getExchangeRate, 120000);
     }
   });
 };
