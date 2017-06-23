@@ -59,17 +59,13 @@ function _bot() {
       var sendMsg2 = '美金、港幣、英鎊、澳幣、加拿大幣、新加坡幣、瑞士法郎、日圓、南非幣';
       var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣';
       var sendMsg4 = '請輸入貨幣(例:$$美金,$$港幣)'
-      event.reply(sendMsg+sendMsg2+sendMsg3).then(function(data) {
-        console.log('send:'+sendMsg+sendMsg2+sendMsg3);
+
+      event.reply(sendMsg+sendMsg2+sendMsg3+'\n'+sendMsg4).then(function(data) {
+        console.log('send:'+sendMsg+sendMsg2+sendMsg3+'\n'+sendMsg4);
       }).catch(function(error) {
         console.log('error');
       });
      
-     event.reply(sendMsg4).then(function(data) {
-        console.log('sned'+sendMsg4);
-      }).catch(function(error) {
-        console.log('error');
-      });
       }
       else if(msg.indexOf('$$')!= -1){
       getExchangeRate(event);
