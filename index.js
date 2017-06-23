@@ -12,6 +12,7 @@ var bot = linebot({
   console.log(event); //把收到訊息的 event 印出來看看
 });*/
 
+
 var timer;
 var pm = [];
 _getJSON();
@@ -20,6 +21,8 @@ _bot();
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
+
+_pmvalue();
 
 //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換
 var server = app.listen(process.env.PORT || 8080, function() {
