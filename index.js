@@ -117,6 +117,7 @@ function getExchangeRate(event) {
   var moneyArr = ["美金","港幣","英鎊","澳幣","加拿大幣","新加坡幣","瑞士法郎","日圓",
 	  "南非幣","瑞典幣","紐元","泰幣","菲國比索","印尼幣","歐元","韓元","越南盾","馬來幣","人民幣"];
   var replyMsg = '';
+  var replyMsg2 = '';
   var flag = -1;
   var msg = event.message.text;
   for(i=0;i<moneyArr.length;i++){
@@ -149,10 +150,12 @@ function getExchangeRate(event) {
       console.log(target[exCounter].children[2].data);
       var answer = target[exCounter].children[2].data;
       replyMsg = moneyArr[exCounter]+'買入匯率= ' + answer;
+
       console.log(target[exCounter].children[12].data);
-      var answer = target[exCounter].children[12].data;
-      replyMsg = moneyArr[exCounter]+'賣出匯率= ' + answer;
-      bot.push(userId,replyMsg);  
+      var answer2 = target[exCounter].children[12].data;
+      replyMsg2 = moneyArr[exCounter]+'賣出匯率= ' + answer2;
+      bot.push(userId,replyMsg); 
+      bot.push(userId,replyMsg2); 
     }
   });
 }
