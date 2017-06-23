@@ -148,7 +148,7 @@ function getExchangeRate(event) {
     } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
-      console.log('get target'+target);
+      var target2 = $(".rate-content-cash.text-right.print_hide");
       console.log('get target Index:'+ exCounter);
       var exCounter2 = exCounter*2;
       
@@ -161,13 +161,13 @@ function getExchangeRate(event) {
       console.log(target[exCounter2+1].children[0].data);
       replyMsg2 = moneyArr[exCounter]+'即期賣出匯率= ' + answer2;
 
-      var answer3 = target[exCounter2].children[0].data;
-      console.log(target[exCounter2].children[0].data);
+      var answer3 = target2[exCounter2].children[0].data;
+      console.log(target2[exCounter2].children[0].data);
       replyMsg3 = moneyArr[exCounter]+'現金買入匯率= ' + answer3;
 
       
-      var answer4 = target[exCounter2+1].children[0].data;
-      console.log(target[exCounter2+1].children[0].data);
+      var answer4 = target2[exCounter2+1].children[0].data;
+      console.log(target2[exCounter2+1].children[0].data);
       replyMsg4 = moneyArr[exCounter]+'現金賣出匯率= ' + answer4;
 
       var finalMsg = replyMsg+'\n'+replyMsg2+'\n'+replyMsg3+'\n'+replyMsg4;
