@@ -46,13 +46,10 @@ function _bot() {
       console.log('get '+msg);
       if(msg.indexOf('pm2.5')){
       _pmvalue(event,msg);
-     }
-     else if(msg.indexOf('匯率')){
-      getExchangeRate();
-      var $ = cheerio.load(body);
-	  var target = $(".rate-content-sight.text-right.print_hide");
-	  console.log("now 日幣匯率"+target[15].children[0].data);
-     }
+      }
+      else if(msg.indexOf('匯率')){
+      getExchangeRate(event);
+      }
 
     }
   });
@@ -90,17 +87,30 @@ function _pmvalue(event,msg){
     
 }
 
-function getExchangeRate() {
+function getExchangeRate(event) {
+  console.log('enter ER function');	
+  var replyMsg = '';
+
+  clearTimeout(timer2);
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
   }, function(error, response, body) {
     if (error || !body) {
       return;
-    }else{
+    } else {
+      var $ = cheerio.load(body);
+      var target = $(".rate-content-sight.text-right.print_hide");
+      console.log(target[15].children[0].data);
+      jp = target[15].children[0].data;
+      replyMsg = '匯率= ' + jp;
+      event.reply(replyMsg).then(function(data) {
+        console.log(replyMsg);
+      }).catch(function(error) {
+        console.log('error');
+      });
 
-    // 爬完網頁後要做的事情
-        console.log(body);
+      timer2 = setInterval(_japan, 120000);
     }
   });
 };
