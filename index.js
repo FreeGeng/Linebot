@@ -110,10 +110,10 @@ function getExchangeRate(event) {
   var replyMsg = '';
  
   var msg = event.message.text;
-  for(i=0;i<moneyArr.length;i++){
+  for(i=0;i<18;i++){
      if(msg.indexOf(moneyArr[i]) != -1){
       	exCounter=i;
-      	 console.log('compare succeed!');
+      	console.log('compare succeed!');
       	break;
      }
      else{
