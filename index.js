@@ -117,6 +117,7 @@ function getExchangeRate(event) {
       	  break;
       	}
       }
+   } 
 
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
