@@ -116,6 +116,12 @@ function getExchangeRate(event) {
       	 console.log('compare succeed!');
       	break;
      }
+     else{
+     	console.log('compare error!');
+     	replyMsg = '沒這個選項QQ 你是不是拼錯了';
+      bot.push(userId,replyMsg);
+      return;  
+     }
   }
 
   request({
