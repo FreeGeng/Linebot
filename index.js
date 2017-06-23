@@ -11,7 +11,8 @@ var bot = linebot({
 });
 
 //function execution
-var timer;
+var timer;//for PM2.5
+var timer2;//for exchange rate
 var pm = [];
 _getJSON();
 
