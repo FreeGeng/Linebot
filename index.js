@@ -35,15 +35,19 @@ function _bot() {
       if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
-            replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
+          	if(e[1]>50)
+            replyMsg = e[0] + '的PM2.5=' + e[1] + '要死人啦~';
+            else 
+            replyMsg = e[0] + '的PM2.5=' + e[1] + '出去玩摟~';
           }
+
         });
         if (replyMsg == '') {
-          replyMsg = '請輸入正確的地點';
+          replyMsg = '我要地點! 然後我沒有連續性!請給我完整指令==';
         }
       }
       if (replyMsg == '') {
-        replyMsg = '不知道「'+msg+'」是什麼意思 ';
+        replyMsg = '「'+msg+'」是什麼意思? 講人話R ';
       }
 
       event.reply(replyMsg).then(function(data) {
