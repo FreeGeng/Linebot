@@ -1,8 +1,8 @@
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
-var request = require("request");//get open data
-var cheerio = require("cheerio");//for parse open data
+var request = require('request');//get open data
+var cheerio = require('cheerio');//for parse open data
 
 var bot = linebot({
   channelId: 1521338926,
