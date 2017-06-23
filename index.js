@@ -2,7 +2,7 @@ var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
 var request = require('request');//get open data
-var cheerio = require('cheerio');//for parse open data
+//var cheerio = require('cheerio');//for parse open data
 
 var bot = linebot({
   channelId: 1521338926,
@@ -26,6 +26,8 @@ var server = app.listen(process.env.PORT || 8080, function() {
   console.log("App now running on port", port);
 });
 
+
+
 function _getJSON() {
   clearTimeout(timer);
   getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
@@ -45,7 +47,7 @@ function _bot() {
       var msg = event.message.text;
       console.log('get '+msg);
       if(msg.indexOf('pm2.5')){
-      _pmvalue(event,msg);
+      pmvalue(event,msg);
       }
       else if(msg.indexOf('匯率')){
       getExchangeRate(event);
@@ -56,7 +58,7 @@ function _bot() {
 
 }
 
-function _pmvalue(event,msg){
+function pmvalue(event,msg){
 	  console.log('enter PM function');
 	  var replyMsg = '';
       if (msg.indexOf('PM2.5') != -1) {
@@ -98,7 +100,7 @@ function getExchangeRate(event) {
   }, function(error, response, body) {
     if (error || !body) {
       return;
-    } else {
+    } /*else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
       console.log(target[15].children[0].data);
@@ -111,6 +113,6 @@ function getExchangeRate(event) {
       });
 
       timer2 = setInterval(_japan, 120000);
-    }
+    }*/
   });
 };
