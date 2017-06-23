@@ -46,12 +46,18 @@ function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {	
       var msg = event.message.text;
-      console.log('get '+msg);
+      console.log('get：'+msg);
 
       if(msg.indexOf('pm2.5') != -1||msg.indexOf('PM2.5') != -1 ){
       pmvalue(event,msg);
       }
       else if(msg.indexOf('匯率')!= -1){
+      var userId = 'U7921a56a665525ddf9198ea3807a460f';
+      var sendMsg = 'halo';
+      bot.push(userId,sendMsg);
+      console.log('send: '+sendMsg);
+
+
       getExchangeRate(event);
       }
 
@@ -93,9 +99,9 @@ function pmvalue(event,msg){
 
 function getExchangeRate(event) {
   console.log('enter ER function');	
-  var replyMsg = '';
 
-  //clearTimeout(timer2);
+  var replyMsg = '';
+  var exchangeRate[18];
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
@@ -113,8 +119,6 @@ function getExchangeRate(event) {
       }).catch(function(error) {
         console.log('error');
       });
-
-      //timer2 = setInterval(getExchangeRate, 120000);
     }
   });
 };
