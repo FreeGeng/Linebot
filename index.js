@@ -21,7 +21,7 @@ _getJSON();
 _bot();
 const app = express();
 const linebotParser = bot.parser();
-app.post('/', linebotParser);
+app.post('/', linebotParser);//接收來自Line server的訊息
 
 //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換
 var server = app.listen(process.env.PORT || 8080, function() {
@@ -52,7 +52,7 @@ function _bot() {
       var sendMsg ='';
 
       if(msg.indexOf('pm2.5') != -1||msg.indexOf('PM2.5') != -1 ){
-      pmvalue(event,msg);
+      pmvalue(event);
       }
       else if(msg.indexOf('匯率')!= -1){
       sendMsg = '支援匯率： ';
@@ -67,6 +67,9 @@ function _bot() {
       else if(msg.indexOf('$$')!= -1){
       getExchangeRate(event);
       }
+      else if(msf.indexOf('天氣')!=-1){
+      //weather(event);
+      }
       else{
       	sendMsg = '超出能力範圍 對不起我很愚蠢'
       	bot.push(userId,sendMsg); 
@@ -77,9 +80,10 @@ function _bot() {
 
 }
 
-function pmvalue(event,msg){
+function pmvalue(event){
 	  console.log('enter PM function');
 	  var replyMsg = '';
+	  var msg = event.message.text;
       if (msg.indexOf('pm2.5') != -1||msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
@@ -140,13 +144,42 @@ function getExchangeRate(event) {
     } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
-      var exCounter2 = exCounter*2+1;
-      console.log('get target Index:'+ exCounter2);
+      console.log('get target Index:'+ exCounter);
       
-      console.log(target[exCounter2].children[0].data);
-      var answer = target[exCounter2].children[0].data;
-      replyMsg = moneyArr[exCounter]+'匯率= ' + answer;
+      console.log(target[exCounter].children[2].data);
+      var answer = target[exCounter].children[2].data;
+      replyMsg = moneyArr[exCounter]+'買入匯率= ' + answer;
+      console.log(target[exCounter].children[12].data);
+      var answer = target[exCounter].children[12].data;
+      replyMsg = moneyArr[exCounter]+'賣出匯率= ' + answer;
       bot.push(userId,replyMsg);  
     }
   });
 }
+/*
+function weather(event){
+  request({
+        uri: 'http://api.openweathermap.org/data/2.5/weather',
+        qs: {
+            appid: weather_key,
+            lat: lat,
+            lon: lng,
+            lang: "zh_tw",
+            units: "metric"
+        },
+        method: 'GET',
+  },function (error, response, body) {
+            //Check for error
+            if (error) {
+                return console.log('Error:', error);
+            }
+            
+            var data = JSON.parse(body);
+            // 傳送 城市名稱 天氣狀況 溫度
+            replyMsg = data.name + " " + data.weather[0].description + " 溫度:" + data.main.temp)
+            bot.push(userId,replyMsg);  
+
+        }
+    );
+
+}*/
