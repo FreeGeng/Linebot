@@ -35,8 +35,15 @@ function _bot() {
       if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
-          	if(e[1]>50)
-            replyMsg = e[0] + '的PM2.5=' + e[1] + '要死人啦~';
+          	if(e[1]>50){
+            replyMsg = e[0] + '的PM2.5=' + e[1];
+             setTimeout(function(){
+             var userId = '使用者 ID';
+             var sendMsg = '要死人啦~';
+             bot.push(userId,sendMsg);
+             console.log('send: '+sendMsg);
+             },1000);
+            }
             else 
             replyMsg = e[0] + '的PM2.5=' + e[1] + '出去玩摟~';
           }
