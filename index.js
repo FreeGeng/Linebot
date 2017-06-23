@@ -101,7 +101,7 @@ function getExchangeRate(event) {
   }, function(error, response, body) {
     if (error || !body) {
       return;
-    } /*else {
+    } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
       console.log(target[15].children[0].data);
@@ -114,6 +114,6 @@ function getExchangeRate(event) {
       });
 
       timer2 = setInterval(_japan, 120000);
-    }*/
+    }
   });
 };
