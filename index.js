@@ -59,8 +59,8 @@ function _bot() {
       var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣';
       var sendMsg4 = '請輸入貨幣(例:$$美金,$$港幣)'
       bot.push(userId,sendMsg+sendMsg2+sendMsg3);
-      bot.push(userId,sendMsg4);
-      console.log('send: '+sendMsg+sendMsg2+sendMsg3+sendMsg4);
+      console.log('send: '+sendMsg+sendMsg2+sendMsg3);
+      bot.push(userId,sendMsg4);  
       console.log('send: '+sendMsg4);
       }
       else if(msg.indexOf('$$')!= -1){
@@ -108,16 +108,15 @@ function getExchangeRate(event) {
   var moneyArr = ["美金","港幣","英鎊","澳幣","加拿大幣","新加坡幣","瑞士法郎","日圓",
 	  "南非幣","瑞典幣","紐元","泰幣","菲國比索","印尼幣","歐元","韓元","越南盾","馬來幣","人民幣"];
   var replyMsg = '';
-    if (event.message.type == 'text') {	
-      var msg = event.message.text;
-      
-      for(i=0;i<moneyArr.length;i++){
-      	if(msg.indexOf(moneyArr[i]) != -1){
-      	  exCounter=i;
-      	  break;
-      	}
-      }
-   } 
+ 
+  var msg = event.message.text;
+  for(i=0;i<moneyArr.length;i++){
+     if(msg.indexOf(moneyArr[i]) != -1){
+      	exCounter=i;
+      	 console.log('compare succeed!');
+      	break;
+     }
+  }
 
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
@@ -132,11 +131,7 @@ function getExchangeRate(event) {
       console.log(target[targetIndex].children[0].data);
       answer = target[targetIndex].children[0].data;
       replyMsg = msg+'匯率= ' + answer;
-      event.reply(replyMsg).then(function(data) {
-        console.log(replyMsg);
-      }).catch(function(error) {
-        console.log('error');
-      });
+      bot.push(userId,replyMsg);  
     }
   });
 }
