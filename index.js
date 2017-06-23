@@ -46,10 +46,10 @@ function _bot() {
     if (event.message.type == 'text') {	
       var msg = event.message.text;
       console.log('get '+msg);
-      if(msg.indexOf('pm2.5')){
+      if(msg.indexOf('pm2.5') != -1){
       pmvalue(event,msg);
       }
-      else if(msg.indexOf('匯率')){
+      else if(msg.indexOf('匯率')!= -1){
       getExchangeRate(event);
       }
 
