@@ -128,9 +128,12 @@ function getExchangeRate(event) {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
       var targetIndex = exCounter*2-1;
-      console.log(target[0].children[0].data);
-      answer = target[0].children[0].data;
-      replyMsg = msg+'匯率= ' + answer;
+      console.log('get target Index:'+targetIndex);
+      var targetLocate = target[targetIndex];
+
+      console.log(targetLocate.children[0].data);
+      answer = targetLocate.children[0].data;
+      replyMsg = moneyArr[exCounter]+'匯率= ' + answer;
       bot.push(userId,replyMsg);  
     }
   });
