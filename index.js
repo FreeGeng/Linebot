@@ -8,11 +8,7 @@ var bot = linebot({
   channelAccessToken: 'xBMq2+BJ/RtP6FvPKF0GjpJSVCTFQQYWFMSX8EJJAe0UfSDDcLqkxU9oGWFh1hJSc2QhapVx215C74mpzfPfRWRfw05p7MGKa/znmFrAs9L7AKTApVLIRLebkZQXCTiT8gC/d7AXJFt5zOzH7Sjj5gdB04t89/1O/w1cDnyilFU='
 });
 
-/*bot.on('message', function(event) {
-  console.log(event); //把收到訊息的 event 印出來看看
-});*/
-
-
+//function execution
 var timer;
 var pm = [];
 _getJSON();
@@ -22,18 +18,30 @@ const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
 
-_pmvalue(msg);
-
 //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換
 var server = app.listen(process.env.PORT || 8080, function() {
   var port = server.address().port;
   console.log("App now running on port", port);
 });
 
+function _getJSON() {
+  clearTimeout(timer);
+  getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
+    response.forEach(function(e, i) {
+      pm[i] = [];
+      pm[i][0] = e.SiteName;
+      pm[i][1] = e['PM2.5'] * 1;
+      pm[i][2] = e.PM10 * 1;
+    });
+  });
+  timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
+}
+
 function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
+      console.log(msg);
       _pmvalue(msg);
     }
   });
@@ -41,6 +49,7 @@ function _bot() {
 }
 
 function _pmvalue(msg){
+	  console.log('enter PM function');
 	  var replyMsg = '';
       if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
@@ -68,17 +77,4 @@ function _pmvalue(msg){
         console.log('error');
       });
     
-}
-
-function _getJSON() {
-  clearTimeout(timer);
-  getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
-    response.forEach(function(e, i) {
-      pm[i] = [];
-      pm[i][0] = e.SiteName;
-      pm[i][1] = e['PM2.5'] * 1;
-      pm[i][2] = e.PM10 * 1;
-    });
-  });
-  timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
 }
