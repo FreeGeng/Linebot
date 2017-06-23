@@ -160,13 +160,13 @@ function getExchangeRate(event) {
       console.log(target[exCounter2+1].children[0].data);
       replyMsg2 = moneyArr[exCounter]+'即期賣出匯率= ' + answer2;
 
-      var answer3 = target[exCounter2].children[0].data[2];
-      console.log(target[exCounter2].children[0].data[2]);
+      var answer3 = target[exCounter2].children[2].data;
+      console.log(target[exCounter2].children[2].data);
       replyMsg3 = moneyArr[exCounter]+'現金買入匯率= ' + answer3;
 
       
-      var answer4 = target[exCounter2+1].children[0].data[2];
-      console.log(target[exCounter2+1].children[0].data[2]);
+      var answer4 = target[exCounter2+1].children[3].data;
+      console.log(target[exCounter2+1].children[3].data);
       replyMsg4 = moneyArr[exCounter]+'現金賣出匯率= ' + answer4;
 
       var finalMsg = replyMsg+'\n'+replyMsg2+'\n'+replyMsg3+'\n'+replyMsg4;
