@@ -118,6 +118,9 @@ function getExchangeRate(event) {
 	  "南非幣","瑞典幣","紐元","泰幣","菲國比索","印尼幣","歐元","韓元","越南盾","馬來幣","人民幣"];
   var replyMsg = '';
   var replyMsg2 = '';
+  var replyMsg3 = '';
+  var replyMsg4 = '';
+
   var flag = -1;
   var msg = event.message.text;
   for(i=0;i<moneyArr.length;i++){
@@ -149,17 +152,25 @@ function getExchangeRate(event) {
       var exCounter2 = exCounter*2;
       
       var answer = target[exCounter2].children[0].data;
-
       console.log(target[exCounter2].children[0].data);
-      replyMsg = moneyArr[exCounter]+'買入匯率= ' + answer;
+      replyMsg = moneyArr[exCounter]+'即期買入匯率= ' + answer;
 
       
       var answer2 = target[exCounter2+1].children[0].data;
       console.log(target[exCounter2+1].children[0].data);
-      replyMsg2 = moneyArr[exCounter]+'賣出匯率= ' + answer2;
+      replyMsg2 = moneyArr[exCounter]+'即期賣出匯率= ' + answer2;
 
-      bot.push(userId,replyMsg); 
-      bot.push(userId,replyMsg2); 
+      var answer3 = target[exCounter2].children[1].data;
+      console.log(target[exCounter2].children[1].data);
+      replyMsg3 = moneyArr[exCounter]+'現金買入匯率= ' + answer3;
+
+      
+      var answer2 = target[exCounter2+1].children[1].data;
+      console.log(target[exCounter2+1].children[1].data);
+      replyMsg4 = moneyArr[exCounter]+'現金賣出匯率= ' + answer4;
+
+      var finalMsg = replyMsg+'\n'+replyMsg2+'\n'+replyMsg3+'\n'+replyMsg4;
+      bot.push(userId,finalMsg); 
     }
   });
 }
