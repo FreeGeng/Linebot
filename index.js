@@ -55,7 +55,7 @@ function _bot() {
       var userId = 'U7921a56a665525ddf9198ea3807a460f';//my userId
       var sendMsg = '支援匯率： ';
       var sendMsg2 = '美金、港幣、英鎊、澳幣、加拿大幣、新加坡幣、瑞士法郎、日圓、南非幣';
-      var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣'
+      var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣';
       bot.push(userId,sendMsg+sendMsg2+sendMsg3);
       console.log('send: '+sendMsg+sendMsg2+sendMsg3);
 
