@@ -135,8 +135,9 @@ function getExchangeRate(event) {
     } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
-      console.log('get target Index:'+exCounter);
-
+      exCounter = exCounter*2+1;
+      console.log('get target Index:'+ exCounter);
+      
       console.log(target[exCounter].children[0].data);
       var answer = target[exCounter].children[0].data;
       replyMsg = moneyArr[exCounter]+'匯率= ' + answer;
