@@ -59,20 +59,31 @@ function _bot() {
       var sendMsg2 = '美金、港幣、英鎊、澳幣、加拿大幣、新加坡幣、瑞士法郎、日圓、南非幣';
       var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣';
       var sendMsg4 = '請輸入貨幣(例:$$美金,$$港幣)'
-      bot.push(userId,sendMsg+sendMsg2+sendMsg3);
-      console.log('send: '+sendMsg+sendMsg2+sendMsg3);
-      bot.push(userId,sendMsg4);  
-      console.log('send: '+sendMsg4);
+      event.reply(sendMsg+sendMsg2+sendMsg3).then(function(data) {
+        console.log('send:'+sendMsg+sendMsg2+sendMsg3);
+      }).catch(function(error) {
+        console.log('error');
+      });
+     
+     event.reply(sendMsg4).then(function(data) {
+        console.log('sned'+sendMsg4);
+      }).catch(function(error) {
+        console.log('error');
+      });
       }
       else if(msg.indexOf('$$')!= -1){
       getExchangeRate(event);
       }
       else if(msg.indexOf('天氣')!=-1){
-      //weather(event);
+     //weather(event);
       }
       else{
       	sendMsg = '超出能力範圍 對不起我很愚蠢'
-      	bot.push(userId,sendMsg); 
+      	event.reply(sendMsg).then(function(data) {
+        console.log('send:'+sendMsg);
+      }).catch(function(error) {
+        console.log('error');
+      });
       }
 
     }
@@ -135,7 +146,11 @@ function getExchangeRate(event) {
   if(flag==-1){
      console.log('compare error!');
      replyMsg = '沒這個選項QQ 你是不是拼錯了';
-      bot.push(userId,replyMsg);
+      event.reply(replyMsg).then(function(data) {
+        console.log(replyMsg);
+      }).catch(function(error) {
+        console.log('error');
+      });
       return; 
   }
   
@@ -147,8 +162,8 @@ function getExchangeRate(event) {
       return;
     } else {
       var $ = cheerio.load(body);
-      var target = $(".rate-content-sight.text-right.print_hide");
-      var target2 = $(".rate-content-cash.text-right.print_hide");
+      var target = $(".rate-content-sight.text-right.print_hide");//即期
+      var target2 = $(".rate-content-cash.text-right.print_hide");//現金
       console.log('get target Index:'+ exCounter);
       var exCounter2 = exCounter*2;
       
@@ -171,10 +186,15 @@ function getExchangeRate(event) {
       replyMsg4 = moneyArr[exCounter]+'現金賣出匯率= ' + answer4;
 
       var finalMsg = replyMsg+'\n'+replyMsg2+'\n'+replyMsg3+'\n'+replyMsg4;
-      bot.push(userId,finalMsg); 
+      event.reply(finalMsg).then(function(data) {
+        console.log(finalMsg);
+      }).catch(function(error) {
+        console.log('error');
+      });
     }
   });
 }
+
 /*
 function weather(event){
   request({
