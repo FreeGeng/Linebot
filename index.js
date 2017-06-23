@@ -58,7 +58,9 @@ function _bot() {
       var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣';
       var sendMsg4 = '請輸入貨幣(例:$$美金,$$港幣)'
       bot.push(userId,sendMsg+sendMsg2+sendMsg3);
+      bot.push(userId,sendMsg4);
       console.log('send: '+sendMsg+sendMsg2+sendMsg3+sendMsg4);
+      console.log('send: '+sendMsg4);
       }
       else if(msg.indexOf('$$')!= -1){
       getExchangeRate(event);
@@ -127,7 +129,7 @@ function getExchangeRate(event) {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
       console.log(target[counter*2-1].children[0].data);
-      var answer = target[counter*2-1].children[0].data;
+      answer = target[counter*2-1].children[0].data;
       replyMsg = msg+'匯率= ' + answer;
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
