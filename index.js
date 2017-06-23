@@ -47,7 +47,8 @@ function _bot() {
     if (event.message.type == 'text') {	
       var msg = event.message.text;
       console.log('get '+msg);
-      if(msg.indexOf('pm2.5') != -1){
+
+      if(msg.indexOf('pm2.5') != -1||msg.indexOf('PM2.5') != -1 ){
       pmvalue(event,msg);
       }
       else if(msg.indexOf('匯率')!= -1){
@@ -62,7 +63,7 @@ function _bot() {
 function pmvalue(event,msg){
 	  console.log('enter PM function');
 	  var replyMsg = '';
-      if (msg.indexOf('PM2.5') != -1) {
+      if (msg.indexOf('pm2.5') != -1||msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
           	if(e[1]>50){
@@ -94,7 +95,7 @@ function getExchangeRate(event) {
   console.log('enter ER function');	
   var replyMsg = '';
 
-  clearTimeout(timer2);
+  //clearTimeout(timer2);
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
@@ -113,7 +114,7 @@ function getExchangeRate(event) {
         console.log('error');
       });
 
-      timer2 = setInterval(getExchangeRate, 120000);
+      //timer2 = setInterval(getExchangeRate, 120000);
     }
   });
 };
