@@ -32,26 +32,17 @@ function _bot() {
     if (event.message.type == 'text') {
       var msg = event.message.text;
       var replyMsg = '';
+      var replyMsg2 = '';
       if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
           	if(e[1]>50){
              replyMsg = e[0] + '的PM2.5=' + e[1];
-             setTimeout(function(){
-             var userId = '使用者 ID';
-             var sendMsg = '要死人啦~';
-             bot.push(userId,sendMsg);
-             console.log('send: '+sendMsg);
-             },1000);
+             replyMsg2 = '要死人啦~';
             }
             else{
-             replyMsg = e[0] + '的PM2.5=' + e[1];
-             setTimeout(function(){
-             var userId = '使用者 ID';
-             var sendMsg = '出去玩摟~';
-             bot.push(userId,sendMsg);
-             console.log('send: '+sendMsg);
-             },1000);
+             replyMsg = e[0] + '的PM2.5=' + e[1];     
+             replyMsg2 = '出去玩摟~';
             }
           }
 
@@ -66,6 +57,11 @@ function _bot() {
 
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
+      }).catch(function(error) {
+        console.log('error');
+      });
+      event.reply(replyMsg2).then(function(data) {
+        console.log(replyMsg2);
       }).catch(function(error) {
         console.log('error');
       });
