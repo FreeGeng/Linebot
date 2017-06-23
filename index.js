@@ -118,7 +118,6 @@ function getExchangeRate(event) {
       	}
       }
 
-      
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
@@ -139,6 +138,4 @@ function getExchangeRate(event) {
       });
     }
   });
-      
-    }
-};
+}
