@@ -46,7 +46,7 @@ function _bot() {
             }
             else{
              replyMsg = e[0] + '的PM2.5=' + e[1];
-             etTimeout(function(){
+             setTimeout(function(){
              var userId = '使用者 ID';
              var sendMsg = '出去玩摟~';
              bot.push(userId,sendMsg);
