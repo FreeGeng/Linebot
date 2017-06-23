@@ -101,7 +101,6 @@ function getExchangeRate(event) {
   console.log('enter ER function');	
 
   var replyMsg = '';
-  var exchangeRate[18];
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
