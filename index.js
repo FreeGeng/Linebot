@@ -36,7 +36,7 @@ function _bot() {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
           	if(e[1]>50){
-            replyMsg = e[0] + '的PM2.5=' + e[1];
+             replyMsg = e[0] + '的PM2.5=' + e[1];
              setTimeout(function(){
              var userId = '使用者 ID';
              var sendMsg = '要死人啦~';
@@ -44,8 +44,15 @@ function _bot() {
              console.log('send: '+sendMsg);
              },1000);
             }
-            else 
-            replyMsg = e[0] + '的PM2.5=' + e[1] + '出去玩摟~';
+            else{
+             replyMsg = e[0] + '的PM2.5=' + e[1];
+             etTimeout(function(){
+             var userId = '使用者 ID';
+             var sendMsg = '出去玩摟~';
+             bot.push(userId,sendMsg);
+             console.log('send: '+sendMsg);
+             },1000);
+            }
           }
 
         });
