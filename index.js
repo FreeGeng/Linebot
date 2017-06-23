@@ -128,8 +128,8 @@ function getExchangeRate(event) {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
       var targetIndex = exCounter*2-1;
-      console.log(target[targetIndex].children[0].data);
-      answer = target[targetIndex].children[0].data;
+      console.log(target[0].children[0].data);
+      answer = target[0].children[0].data;
       replyMsg = msg+'匯率= ' + answer;
       bot.push(userId,replyMsg);  
     }
