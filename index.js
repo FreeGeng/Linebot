@@ -31,18 +31,22 @@ function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
-      var replyMsg = '';
-      var replyMsg2 = '';
+      _pmvalue(msg);
+    }
+  });
+
+}
+
+function _pmvalue(msg){
+	  var replyMsg = '';
       if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
           	if(e[1]>50){
-             replyMsg = e[0] + '的PM2.5=' + e[1];
-             replyMsg2 = '要死人啦~';
+             replyMsg = e[0] + '的PM2.5=' + e[1] + ' 要死人啦~';
             }
             else{
-             replyMsg = e[0] + '的PM2.5=' + e[1];     
-             replyMsg2 = '出去玩摟~';
+             replyMsg = e[0] + '的PM2.5=' + e[1] + ' 出去玩摟~';     
             }
           }
 
@@ -52,7 +56,7 @@ function _bot() {
         }
       }
       if (replyMsg == '') {
-        replyMsg = '「'+msg+'」是什麼意思? 講人話R ';
+        replyMsg = msg + '是什麼意思? 講人話R ';
       }
 
       event.reply(replyMsg).then(function(data) {
@@ -60,14 +64,7 @@ function _bot() {
       }).catch(function(error) {
         console.log('error');
       });
-      event.reply(replyMsg2).then(function(data) {
-        console.log(replyMsg2);
-      }).catch(function(error) {
-        console.log('error');
-      });
-    }
-  });
-
+    
 }
 
 function _getJSON() {
