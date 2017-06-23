@@ -41,14 +41,14 @@ function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
-      console.log(msg);
-      _pmvalue(msg);
+      console.log('get'+msg);
+      _pmvalue(event,msg);
     }
   });
 
 }
 
-function _pmvalue(msg){
+function _pmvalue(event,msg){
 	  console.log('enter PM function');
 	  var replyMsg = '';
       if (msg.indexOf('PM2.5') != -1) {
