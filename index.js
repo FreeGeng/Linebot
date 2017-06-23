@@ -1,6 +1,8 @@
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
+var request = require("request");//get open data
+var cheerio = require("cheerio");//for parse open data
 
 var bot = linebot({
   channelId: 1521338926,
@@ -39,10 +41,19 @@ function _getJSON() {
 
 function _bot() {
   bot.on('message', function(event) {
-    if (event.message.type == 'text') {
+    if (event.message.type == 'text') {	
       var msg = event.message.text;
-      console.log('get'+msg);
+      console.log('get '+msg);
+      if(msg.indexOf('pm2.5')){
       _pmvalue(event,msg);
+     }
+     else if(msg.indexOf('匯率')){
+      getExchangeRate();
+      var $ = cheerio.load(body);
+	  var target = $(".rate-content-sight.text-right.print_hide");
+	  console.log("now 日幣匯率"+target[15].children[0].data);
+     }
+
     }
   });
 
@@ -78,3 +89,18 @@ function _pmvalue(event,msg){
       });
     
 }
+
+function getExchangeRate() {
+  request({
+    url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
+    method: "GET"
+  }, function(error, response, body) {
+    if (error || !body) {
+      return;
+    }else{
+
+    // 爬完網頁後要做的事情
+        console.log(body);
+    }
+  });
+};
