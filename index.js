@@ -97,7 +97,7 @@ function pmvalue(event,msg){
     
 }
 
-function getExchangeRate(event) {
+function getExchangeRate() {
   console.log('enter ER function');
   var moneyArr = ["美金","港幣","英鎊","澳幣","加拿大幣","新加坡幣","瑞士法郎","日圓",
 	  "南非幣","瑞典幣","紐元","泰幣","菲國比索","印尼幣","歐元","韓元","越南盾","馬來幣","人民幣"];
@@ -136,7 +136,6 @@ function getExchangeRate(event) {
     }
   });
       
-
     }
   });
 };
