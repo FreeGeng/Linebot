@@ -13,6 +13,7 @@ var bot = linebot({
 //function execution
 var timer;//for PM2.5
 var timer2;//for exchange rate
+var exCounter;//for exchange rate counter
 var pm = [];
 _getJSON();
 
@@ -110,10 +111,9 @@ function getExchangeRate(event) {
     if (event.message.type == 'text') {	
       var msg = event.message.text;
       
-      var counter = 0;
       for(i=0;i<moneyArr.length;i++){
       	if(msg.indexOf(moneyArr[i]) != -1){
-      	  counter=i;
+      	  exCounter=i;
       	  break;
       	}
       }
@@ -128,8 +128,8 @@ function getExchangeRate(event) {
     } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
-      console.log(target[counter*2-1].children[0].data);
-      answer = target[counter*2-1].children[0].data;
+      console.log(target[exCounter*2-1].children[0].data);
+      answer = target[exCounter*2-1].children[0].data;
       replyMsg = msg+'匯率= ' + answer;
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
