@@ -108,22 +108,24 @@ function getExchangeRate(event) {
   var moneyArr = ["美金","港幣","英鎊","澳幣","加拿大幣","新加坡幣","瑞士法郎","日圓",
 	  "南非幣","瑞典幣","紐元","泰幣","菲國比索","印尼幣","歐元","韓元","越南盾","馬來幣","人民幣"];
   var replyMsg = '';
- 
+  var flag = -1;
   var msg = event.message.text;
-  for(i=0;i<18;i++){
+  for(i=0;i<moneyArr.length;i++){
      if(msg.indexOf(moneyArr[i]) != -1){
-      	exCounter=i;
+     	flag = 1;
+      	exCounter = i;
       	console.log('compare succeed!');
       	break;
-     }
-     else{
-     	console.log('compare error!');
-     	replyMsg = '沒這個選項QQ 你是不是拼錯了';
-      bot.push(userId,replyMsg);
-      return;  
-     }
+     }  
   }
-
+  
+  if(flag==-1){
+     console.log('compare error!');
+     replyMsg = '沒這個選項QQ 你是不是拼錯了';
+      bot.push(userId,replyMsg);
+      return; 
+  }
+  
   request({
     url: "http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm",
     method: "GET"
