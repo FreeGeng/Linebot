@@ -48,7 +48,7 @@ function _bot() {
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
       }).catch(function(error) {
-        console.log('錯誤拉~~~~');
+        console.log('error');
       });
     }
   });
