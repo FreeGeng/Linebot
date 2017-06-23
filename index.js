@@ -127,12 +127,10 @@ function getExchangeRate(event) {
     } else {
       var $ = cheerio.load(body);
       var target = $(".rate-content-sight.text-right.print_hide");
-      var targetIndex = exCounter*2-1;
-      console.log('get target Index:'+targetIndex);
-      var targetLocate = target[targetIndex];
+      console.log('get target Index:'+exCounter);
 
-      console.log(targetLocate.children[0].data);
-      answer = targetLocate.children[0].data;
+      console.log(target[exCounter].children[0].data);
+      var answer = target[exCounter].children[0].data;
       replyMsg = moneyArr[exCounter]+'匯率= ' + answer;
       bot.push(userId,replyMsg);  
     }
