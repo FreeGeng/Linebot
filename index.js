@@ -185,8 +185,8 @@ function weather(event){
                 return console.log('Error:', error);
             }
             
-            var data = cheerio.load(body);
-            console.log('weather.data:'+data);
+            //var data = cheerio.load(body);
+            console.log('weather.data:'+body);
 
             // 傳送 城市名稱 天氣狀況 溫度
             //replyMsg = data.name + " " + data.weather[0].description + " 溫度:" + data.main.temp)
