@@ -177,7 +177,7 @@ function getExchangeRate(event) {
 
 function weather(event){
   request({
-        uri: 'http://opendata.cwb.gov.tw/catalog?group=f&dataid=C0032-005',
+        uri: 'http://opendata.cwb.gov.tw/datadownload?dataid=F-C0032-005',
         method: 'GET',
   },function (error, response, body) {
             //Check for error
