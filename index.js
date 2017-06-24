@@ -48,8 +48,10 @@ function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {	
       var msg = event.message.text;
-      var testId = event.message.source;
+
+      var testId = event.message.source.data;
       console.log('userIDDDDD:'+testId);
+
       console.log('get：'+msg);
       var sendMsg ='';
 
