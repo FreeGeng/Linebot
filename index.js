@@ -3,6 +3,7 @@ var express = require('express');
 var getJSON = require('get-json');
 var request = require('request');//get open data
 var cheerio = require('cheerio');//for parse open data
+var bodyParser = require('body-parser');
 
 var bot = linebot({
   channelId: 1521338926,
@@ -21,6 +22,7 @@ _bot();
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);//接收來自Line server的訊息
+app.use(bodyParser.json());
 
 //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換
 var server = app.listen(process.env.PORT || 8080, function() {
@@ -185,7 +187,7 @@ function weather(event){
                 return console.log('Error:', error);
             }
             
-            var data = cheerio.load(body);
+            var data = JSON.parse(body);
             console.log('weather.data:'+data);
 
             // 傳送 城市名稱 天氣狀況 溫度
