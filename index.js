@@ -49,7 +49,7 @@ function _bot() {
     if (event.message.type == 'text') {	
       var msg = event.message.text;
 
-      var testId = event.message.source.data;
+      var testId = event.message.source.userId;
       console.log('userIDDDDD:'+testId);
 
       console.log('get：'+msg);
