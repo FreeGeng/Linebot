@@ -14,7 +14,6 @@ var bot = linebot({
 var timer;//for PM2.5
 var timer2;//for exchange rate
 var exCounter;//for exchange rate counter
-var userId = 'U7921a56a665525ddf9198ea3807a460f';
 var pm = [];
 _getJSON();
 
@@ -47,11 +46,9 @@ function _getJSON() {
 function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {	
+      var userId = event.source.userId;
       var msg = event.message.text;
-
-      var testId = event.source.userId;
-      console.log('userIDDDDD:'+testId);
-
+      console.log('get userID:'+userId);
       console.log('get：'+msg);
       var sendMsg ='';
 
@@ -64,12 +61,10 @@ function _bot() {
       var sendMsg3 = '瑞典幣、紐元、泰幣、菲國比索、印尼幣、歐元、韓元、越南盾、馬來幣、人民幣';
       var sendMsg4 = '請輸入貨幣(例:$$美金,$$港幣)'
 
-      event.reply(sendMsg+sendMsg2+sendMsg3+'\n'+sendMsg4).then(function(data) {
-        console.log('send:'+sendMsg+sendMsg2+sendMsg3+'\n'+sendMsg4);
-      }).catch(function(error) {
-        console.log('error');
-      });
-     
+      bot.push(userId,sendMsg+sendMsg2+sendMsg3);
+      console.log('send:'+sendMsg+sendMsg2+sendMsg3);
+      bot.push(userId,sendMsg4);
+      console.log('send:'+sendMsg4);
       }
       else if(msg.indexOf('$$')!= -1){
       getExchangeRate(event);
@@ -79,11 +74,7 @@ function _bot() {
       }
       else{
       	sendMsg = '超出能力範圍 對不起我很愚蠢'
-      	event.reply(sendMsg).then(function(data) {
-        console.log('send:'+sendMsg);
-      }).catch(function(error) {
-        console.log('error');
-      });
+      	bot.push(userId,sendMsg);
       }
 
     }
@@ -115,12 +106,7 @@ function pmvalue(event){
         replyMsg = msg + '是什麼意思? 講人話R ';
       }
 
-      event.reply(replyMsg).then(function(data) {
-        console.log(replyMsg);
-      }).catch(function(error) {
-        console.log('error');
-      });
-    
+      bot.push(event.source.userId,replyMsg);  
 }
 
 function getExchangeRate(event) {
@@ -146,12 +132,8 @@ function getExchangeRate(event) {
   if(flag==-1){
      console.log('compare error!');
      replyMsg = '沒這個選項QQ 你是不是拼錯了';
-      event.reply(replyMsg).then(function(data) {
-        console.log(replyMsg);
-      }).catch(function(error) {
-        console.log('error');
-      });
-      return; 
+     bot.push(event.source.userId,replyMsg);  
+     return; 
   }
   
   request({
@@ -186,11 +168,7 @@ function getExchangeRate(event) {
       replyMsg4 = moneyArr[exCounter]+'現金賣出匯率= ' + answer4;
 
       var finalMsg = replyMsg+'\n'+replyMsg2+'\n'+replyMsg3+'\n'+replyMsg4;
-      event.reply(finalMsg).then(function(data) {
-        console.log(finalMsg);
-      }).catch(function(error) {
-        console.log('error');
-      });
+      bot.push(event.source.userId,finalMsg);  
     }
   });
 }
