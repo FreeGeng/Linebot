@@ -73,8 +73,9 @@ function _bot() {
      //weather(event);
       }
       else{
-      	sendMsg = '超出能力範圍 對不起我很愚蠢'
+      	sendMsg = msg;
       	bot.push(userId,sendMsg);
+      	console.log('send:'+sendMsg);
       }
 
     }
