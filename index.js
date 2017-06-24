@@ -70,7 +70,7 @@ function _bot() {
       getExchangeRate(event);
       }
       else if(msg.indexOf('天氣')!=-1){
-     //weather(event);
+      weather(event);
       }
       else{
       	sendMsg = msg;
@@ -100,7 +100,7 @@ function pmvalue(event){
 
         });
         if (replyMsg == '') {
-          replyMsg = '我要地點! 然後我沒有連續性!請給我完整指令==';
+          replyMsg = '我要地點! 然後我沒有連續性!請給我完整指令';
         }
       }
       if (replyMsg == '') {
@@ -174,17 +174,10 @@ function getExchangeRate(event) {
   });
 }
 
-/*
+
 function weather(event){
   request({
-        uri: 'http://api.openweathermap.org/data/2.5/weather',
-        qs: {
-            appid: weather_key,
-            lat: lat,
-            lon: lng,
-            lang: "zh_tw",
-            units: "metric"
-        },
+        uri: 'http://opendata.cwb.gov.tw/catalog?group=f&dataid=C0032-005',
         method: 'GET',
   },function (error, response, body) {
             //Check for error
@@ -193,11 +186,13 @@ function weather(event){
             }
             
             var data = JSON.parse(body);
+            console.log('weather.data:'+data);
+
             // 傳送 城市名稱 天氣狀況 溫度
-            replyMsg = data.name + " " + data.weather[0].description + " 溫度:" + data.main.temp)
-            bot.push(userId,replyMsg);  
+            //replyMsg = data.name + " " + data.weather[0].description + " 溫度:" + data.main.temp)
+            //bot.push(userId,replyMsg);  
 
         }
     );
 
-}*/
+}
