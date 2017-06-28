@@ -207,11 +207,17 @@ function weather(event) {
         return;
       }
 
-      var getWeather = $('parameterName').eq(0).text();
+      var weatherType = [];
+
+	  $('parameterName').each(function(i, elem) {
+      weatherType[i] = $(this).text();
+      });
+      weatherType.join(',');
+      //var getWeather = $('parameterName').eq(0).text();
 
 
       
-      console.log('weather.data:' + getWeather);
+      console.log('weather.data:' + weatherType);
     }
   }
   );
