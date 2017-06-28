@@ -187,8 +187,8 @@ function weather(event){
                 return console.log('Error:', error);
             }
             
-            var data = JSON.parse(body);
-            console.log('weather.data:'+data);
+            //var data = .parse(body);
+            console.log('weather.data:'+body);
         }
     );
 
