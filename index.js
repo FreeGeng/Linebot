@@ -179,7 +179,7 @@ function getExchangeRate(event) {
 
 function weather(event){
   request({
-        uri: 'http://opendata.cwb.gov.tw/catalog?group=f&dataid=C0032-005',
+        url: 'http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-984F180A-599F-4146-82BA-A276190F682B',
         method: 'GET',
   },function (error, response, body) {
             //Check for error
@@ -189,11 +189,6 @@ function weather(event){
             
             var data = JSON.parse(body);
             console.log('weather.data:'+data);
-
-            // 傳送 城市名稱 天氣狀況 溫度
-            //replyMsg = data.name + " " + data.weather[0].description + " 溫度:" + data.main.temp)
-            //bot.push(userId,replyMsg);  
-
         }
     );
 
