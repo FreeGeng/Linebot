@@ -179,6 +179,10 @@ function weather(event) {
   var city = ["臺北市", "新北市", "桃園市", "臺中市", "臺南市", "高雄市","基隆市","新竹縣",
   "新竹市","苗栗縣","彰化縣","南投縣","雲林縣","嘉義縣","嘉義市","屏東縣","宜蘭縣","花蓮縣",
   "臺東縣","澎湖縣","金門縣","連江縣"];
+  var parameterName = [];
+  var replyMsg='';
+  var replyMsg2='';
+
   request({
     url: 'http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-984F180A-599F-4146-82BA-A276190F682B',
     method: 'GET',
@@ -191,7 +195,7 @@ function weather(event) {
       var $ = cheerio.load(body);
       var flag = -1;
       var msg = event.message.text;
-      var replyMsg='';
+
 
       for (i = 0; i < city.length; i++) {
         if (msg.indexOf(city[i]) != -1) {
@@ -209,17 +213,22 @@ function weather(event) {
         return;
       }
 
-      var parameterName = [];
+     
 
 	  $('parameterName').each(function(i, elem) {
 	    parameterName[i]=$(this).text();
       });
-      parameterName.join(',');
-      //var getWeather = $('parameterName').eq(0).text();
-
-
       
-      console.log('weather.data:' + parameterName);
+      replyMsg = "未來12小時天氣預估："+ parameterName[cityCounter*15+0]
+                +"且"+ parameterName[cityCounter*15+9];
+      replyMsg2 = "最低溫為："+ parameterName[cityCounter*15+6]+'\n'
+                + "最高溫為：" + parameterName[cityCounter*15+3];
+   
+      console.log('未來12小時天氣預估：' + replyMsg);
+      console.log('溫度：'+replyMsg2);
+      console.log('傳送天氣訊息!');
+      bot.push(event.source.userId, replyMsg);
+      bot.push(event.source.userId, replyMsg2);
     }
   }
   );
