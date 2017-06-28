@@ -207,10 +207,10 @@ function weather(event) {
         return;
       }
 
-      var getWeather = $(city[cityCounter]).eq(0).text();
+      var getWeather = $(city[cityCounter].toString()).eq(0).text();
 
 
-      console.log('city:'+city[cityCounter]);
+      
       console.log('weather.data:' + getWeather);
     }
   }
