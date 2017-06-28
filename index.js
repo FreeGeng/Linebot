@@ -188,8 +188,7 @@ function weather(event){
                 return console.log('Error:', error);
             }else{
             var $ = cheerio.load(body);
-            var result = [];
-			var titles = $('locationName').text();
+			var city[] = $('locationName').text();
 			/*var location;
 			for (var i = 0; i < titles.length; i++) {
   				result.push(titles.eq(i).attr('jtitle'));
@@ -197,7 +196,7 @@ function weather(event){
             for (var j = 0; j < result.length; j++) {
     			var data = JSON.parse(result[j]);
     	    }*/
-            console.log('weather.data:'+titles);
+            console.log('weather.data:'+city[0]);
             }
         }
     );
