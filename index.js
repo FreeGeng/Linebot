@@ -187,8 +187,8 @@ function weather(event){
                 return console.log('Error:', error);
             }
             
-            //var data = .parse(body);
-            console.log('weather.data:'+body);
+            var data = cheerio.load(body);
+            console.log('weather.data:'+data);
         }
     );
 
