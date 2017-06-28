@@ -211,7 +211,7 @@ function weather(event) {
 
 
 
-      console.log('weather.data:' + getCity);
+      console.log('weather.data:' + getWeather);
     }
   }
   );
