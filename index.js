@@ -32,6 +32,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 
 
+//for pm2.5
 function _getJSON() {
   clearTimeout(timer);
   getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
@@ -185,10 +186,16 @@ function weather(event){
             //Check for error
             if (error) {
                 return console.log('Error:', error);
-            }
+            }else{
+            var $ = cheerio.load(body);
+            response.forEach(function(e, i) {
+            weatherData[i] = [];
+      		weatherData[i][0] = e.locationName;
+      	
+            });
             
-            var data = cheerio.load(body);
-            console.log('weather.data:'+data);
+            console.log('weather.data:'+weatherData[0][0]);
+            }
         }
     );
 
