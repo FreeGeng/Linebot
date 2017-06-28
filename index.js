@@ -194,7 +194,7 @@ function weather(event) {
       for (i = 0; i < city.length; i++) {
         if (msg.indexOf(city[i]) != -1) {
           flag = 1;
-          exCounter = i;
+          cityCounter = i;
           console.log('compare succeed!');
           break;
         }
