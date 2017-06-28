@@ -189,7 +189,7 @@ function weather(event){
             }else{
             var $ = cheerio.load(body);
             var result = [];
-			var titles = $("area.jTip");
+			var titles = $('locationName').text();
 			/*var location;
 			for (var i = 0; i < titles.length; i++) {
   				result.push(titles.eq(i).attr('jtitle'));
