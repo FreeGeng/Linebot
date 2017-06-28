@@ -182,6 +182,7 @@ function weather(event) {
   var parameterName = [];
   var replyMsg='';
   var replyMsg2='';
+  var replyMsg3='';
 
   request({
     url: 'http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-984F180A-599F-4146-82BA-A276190F682B',
@@ -223,12 +224,15 @@ function weather(event) {
                 +"且"+ parameterName[cityCounter*15+9];
       replyMsg2 = "最低溫為："+ parameterName[cityCounter*15+6]+'\n'
                 + "最高溫為：" + parameterName[cityCounter*15+3];
+      replyMsg3 = "降雨機率為："+ parameterName[cityCounter*15+12]+"%";
    
-      console.log('未來12小時天氣預估：' + replyMsg);
-      console.log('溫度：'+replyMsg2);
+      console.log(replyMsg);
+      console.log(replyMsg2);
+      console.log(replyMsg3);
       console.log('傳送天氣訊息!');
       bot.push(event.source.userId, replyMsg);
       bot.push(event.source.userId, replyMsg2);
+      bot.push(event.source.userId, replyMsg3);
     }
   }
   );
