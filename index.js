@@ -209,7 +209,7 @@ function weather(event) {
 
       var weatherType = [];
 
-	  $('parameterName').each(function(i, elem) {
+	  $('locationName').each(function(i, elem) {
       weatherType[i] = $(this).text();
       });
       weatherType.join(',');
