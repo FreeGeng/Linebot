@@ -207,7 +207,7 @@ function weather(event) {
         return;
       }
 
-      var getWeather = $(city[cityCounter]).eq(0).children('parameterName').text();
+      var getWeather = $(city[cityCounter]).eq(0).text();
 
 
 
