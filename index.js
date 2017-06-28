@@ -197,7 +197,7 @@ function weather(event){
             for (var j = 0; j < result.length; j++) {
     		var data = JSON.parse(result[j]);
     	    }
-            console.log('weather.data:'+data[0]);
+            console.log('weather.data:'+data);
             }
         }
     );
