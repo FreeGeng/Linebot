@@ -190,14 +190,14 @@ function weather(event){
             var $ = cheerio.load(body);
             var result = [];
 			var titles = $("area.jTip");
-			var location;
+			/*var location;
 			for (var i = 0; i < titles.length; i++) {
-  			result.push(titles.eq(i).attr('jtitle'));
+  				result.push(titles.eq(i).attr('jtitle'));
 			}
             for (var j = 0; j < result.length; j++) {
-    		var data = JSON.parse(result[j]);
-    	    }
-            console.log('weather.data:'+data);
+    			var data = JSON.parse(result[j]);
+    	    }*/
+            console.log('weather.data:'+titles);
             }
         }
     );
