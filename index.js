@@ -188,13 +188,16 @@ function weather(event){
                 return console.log('Error:', error);
             }else{
             var $ = cheerio.load(body);
-            response.forEach(function(e, i) {
-            weatherData[i] = [];
-      		weatherData[i][0] = e.locationName;
-      	
-            });
-            
-            console.log('weather.data:'+weatherData[0][0]);
+            var result = [];
+			var titles = $("area.jTip");
+			var location;
+			for (var i = 0; i < titles.length; i++) {
+  			result.push(titles.eq(i).attr('jtitle'));
+			}
+            for (var j = 0; j < result.length; j++) {
+    		var data = JSON.parse(result[j]);
+    	    }
+            console.log('weather.data:'+data[0]);
             }
         }
     );
